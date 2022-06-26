@@ -2,11 +2,21 @@
 import type { StyleValue } from 'vue'
 import type { SectionName } from '~/utils/model/interface'
 
-const props = defineProps<{
+interface Props {
   id: number
-  sectionName: SectionName
+  sectionName?: SectionName
   imgUrl: string
-}>()
+  showShade?: boolean
+}
+
+const props = withDefaults(defineProps<Props>(), {
+  sectionName: 'New Album',
+  showShade: false,
+})
+
+const getImgUrl = computed(() => {
+  return `${props.imgUrl}?param=512y512`
+})
 
 const router = useRouter()
 
@@ -14,7 +24,7 @@ const focus = ref(false)
 
 const getShadowStyle = computed((): StyleValue => {
   const styles: StyleValue = {}
-  styles.backgroundImage = `url(${props.imgUrl})`
+  styles.backgroundImage = `url(${getImgUrl.value})`
   if (props.sectionName === 'Top Artists')
     styles.borderRadius = '50%'
   return styles
@@ -37,10 +47,10 @@ function play() {
     @mouseleave="focus = false"
     @click="goToPlaylist()"
   >
-    <img :src="imgUrl" alt="" :class="sectionName === 'Top Artists' ? 'rounded-1/2' : 'rounded-2'">
+    <img :src="getImgUrl" alt="" :class="sectionName === 'Top Artists' ? 'rounded-1/2' : 'rounded-2'">
 
     <div
-      v-show="focus === true"
+      v-show="focus"
       class="shade w-1/1 aspect-1"
       absolute top-0 left-0
       flex justify-center items-center
@@ -52,13 +62,13 @@ function play() {
         cursor-default
         @click.stop="play()"
       >
-        <div class="w-1/2 h-1/2" i-carbon-timer />
+        <div class="w-1/2 h-1/2" i-carbon-play-filled-alt />
       </div>
     </div>
 
     <transition name="fade">
       <div
-        v-show="focus"
+        v-show="focus || showShade"
         class="card-shadow w-1/1 aspect-1"
         :style="getShadowStyle"
         absolute top-4 left-0

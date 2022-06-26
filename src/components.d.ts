@@ -14,6 +14,7 @@ declare module 'vue' {
     MusicSectionRow: typeof import('./components/MusicSectionRow.vue')['default']
     Navbar: typeof import('./components/Navbar.vue')['default']
     Player: typeof import('./components/Player.vue')['default']
+    PlaylistItem: typeof import('./components/PlaylistItem.vue')['default']
     RecommendCard: typeof import('./components/RecommendCard.vue')['default']
   }
 }

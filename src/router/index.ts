@@ -20,6 +20,9 @@ const routes = [
   {
     path: '/playlistdetail/:id',
     name: 'playlistdetail',
+    meta: {
+      keepAlive: false,
+    },
     component: () => import('../views/PlaylistDetail.vue'),
   },
 ]

@@ -12,8 +12,8 @@ const placeholder = computed(() => {
 })
 const getSearchStyle = computed(() => {
   if (focus.value)
-    return 'bg-blue-200 color-blue-400'
-  return 'bg-gray-100 color-gray-400'
+    return 'bg-blue-200 color-blue-400 dark:bg-gray-700'
+  return 'bg-gray-100 color-gray-400 dark:bg-gray-800'
 })
 
 const getHStyle = computed(() => {
@@ -43,8 +43,13 @@ function inputUnfocus() {
 </script>
 
 <template>
-  <header>
-    <nav flex justify-center items-center>
+  <header
+    fixed right-0 left-0 top-0
+    z-100
+    px-40
+    dark:bg-hex-121212 dark:bg-opacity-80
+  >
+    <nav flex justify-center items-center h-15>
       <div flex flex-1 class="navigation-buttons">
         <router-link to="/">
           <h1 text-3xl font-bold>
@@ -90,7 +95,7 @@ function inputUnfocus() {
           flex gap-1 justify-center items-center
           :class="getSearchStyle"
         >
-          <div i-carbon-timer />
+          <div i-carbon-search />
           <input
             type="search"
             h-6 w-40
@@ -110,12 +115,24 @@ function inputUnfocus() {
 </template>
 
 <style scoped>
+header {
+  backdrop-filter: saturate(180%) blur(20px);
+  background-color: rgba(255, 255, 255, 0.86);
+}
+@media(max-width: 1280px) {
+  header {
+    padding: 0rem 4rem;
+  }
+}
 @media (max-width: 970px) {
   .navigation-buttons {
     flex: unset;
   }
   .navigation-link {
     gap: 1rem;
+  }
+  header {
+    padding: 0rem 1rem;
   }
 }
 </style>

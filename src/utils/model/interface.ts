@@ -29,7 +29,19 @@ export interface Track {
   id: number
   picUrl: string
   name: string
-  artist: string
+  alia: string
+  artistID: number
+  artistName: string
   albumID: number
   albumName: string
+  duringTime: number
+}
+
+export interface PlaylistDetail {
+  id: number
+  coverImgUrl: string
+  name: string
+  artist: string
+  updateTime: number
+  description: string
 }

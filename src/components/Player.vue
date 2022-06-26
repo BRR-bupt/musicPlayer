@@ -2,27 +2,23 @@
 import { useStore } from '~/store/project'
 
 const store = useStore()
-const getCurrentMusicUrl = computed(() => {
-  return 'https://music.163.com/song/media/outer/url?id=1393659632'
-})
 </script>
 
 <template>
   <div
-    v-show="true"
-    class="player w-1/1 h-14"
+    class="player w-1/1 h-16"
     fixed right-0 left-0 bottom-0
     bg-gray-100
-    dark:bg-gray-900
+    dark:bg-hex-121212
   >
     <div
-      class="process w-1/1 h-0.5"
+      class="process w-1/1 h-0.4"
       bg-gray-200
-      dark:bg-gray-500
+      dark:bg-gray-800
     />
-    <div class="control" px-40 grid grid-cols-3>
+    <div class="control h-1/1" px-40 grid grid-cols-3>
       <div>1</div>
-      <div>
+      <div flex justify-center items-center>
         <audio controls :src="store.currentMusicURL" />
       </div>
       <div>3</div>
