@@ -21,7 +21,7 @@ const tracks = ref<Track[]>([])
 async function getPlaylistDetail() {
   const data = await getTarckOrRankDetail({ id: playlistDetail.id })
 
-  console.log(data)
+  // console.log(data)
 
   playlistDetail.name = data.data.playlist.name
   playlistDetail.coverImgUrl = data.data.playlist.coverImgUrl
@@ -43,15 +43,15 @@ async function getPlaylistDetail() {
       duringTime: item.dt,
     })
   })
-  console.log(tracks.value)
+  // console.log(tracks.value)
 }
 
-// keepalive中组件不会被销毁，所以没有需要一个特殊的钩子函数
-// onActivated 在路由激活时调用
-onMounted(async () => {
-  playlistDetail.id = Number(router.currentRoute.value.params.id)
-  await getPlaylistDetail()
-})
+// onMounted(async () => {
+//   playlistDetail.id = Number(router.currentRoute.value.params.id)
+//   await getPlaylistDetail()
+// })
+playlistDetail.id = Number(router.currentRoute.value.params.id)
+getPlaylistDetail()
 </script>
 
 <script lang="ts">
@@ -61,56 +61,10 @@ export default {
 </script>
 
 <template>
-  <div class="palylist-detail" mt-14>
-    <div class="playlist-info" flex>
-      <div class="cover-info" w-80 h-80>
-        <MusicCard
-          :id="playlistDetail.id"
-          :img-url="playlistDetail.coverImgUrl"
-          :show-shade="true"
-        />
-      </div>
-      <div
-        class="text-info"
-        h-80
-        relative
-        flex flex-1 flex-col
-        ml-20
-      >
-        <h1 class="name" font-bold text-4xl>
-          {{ playlistDetail.name }}
-        </h1>
-        <h3 class="artist" text-xl mt-8>
-          Playlist by {{ playlistDetail.artist }}
-        </h3>
-        <h3 class="update-time" mt-1 text-gray-700 dark:text-gray-400>
-          最后更新于 {{ playlistDetail.updateTime }}
-        </h3>
-        <h3
-          class="description hover:text-black hover:dark:text-gray-200"
-          mt-8
-          text-gray-700 dark:text-gray-400
-          cursor-pointer
-        >
-          {{ playlistDetail.description }}
-        </h3>
-        <div
-          class="control-button"
-          flex gap-10
-          absolute bottom-0
-        >
-          <button border-1 rounded-1 p-2>
-            123
-          </button>
-          <button border-1 rounded-1 p-2>
-            123
-          </button>
-          <button border-1 rounded-1 p-2>
-            123
-          </button>
-        </div>
-      </div>
-    </div>
+  <div class="palylist-detail">
+    <PlaylistInfo :playlist-detail="playlistDetail" />
+    <!-- 该模块消耗时间较长，需要优化 -->
+    <!-- 设置img loading=lazy -->
     <div class="playlist-tracks" my-8>
       <PlaylistItem
         v-for="(track, i) in tracks" :key="i"

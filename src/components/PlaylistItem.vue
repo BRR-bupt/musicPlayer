@@ -14,6 +14,20 @@ const name = computed(() => {
 const getImgUrl = computed(() => {
   return `${props.track.picUrl}?param=224y224`
 })
+
+// const playlistItem = ref<HTMLElement>()
+// const targetIsVisible = ref(false)
+
+// const { stop } = useIntersectionObserver(
+//   playlistItem,
+//   ([{ isIntersecting }], observerElement) => {
+//     if (isIntersecting)
+//       targetIsVisible.value = isIntersecting
+
+//     else
+//       stop()
+//   },
+// )
 </script>
 
 <template>
@@ -24,7 +38,7 @@ const getImgUrl = computed(() => {
     rounded-2
     flex items-center
   >
-    <img :src="getImgUrl" w-14 h-14 rounded-2>
+    <img loading="lazy" :src="getImgUrl" w-14 h-14 rounded-2>
     <div
       class="name-artist"
       flex flex-col flex-1

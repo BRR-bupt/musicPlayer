@@ -16,6 +16,7 @@
 //   artistName: string
 // }
 
+// 各类卡片信息，如歌单、艺人、专辑、排行榜卡片均使用此接口
 export interface MusicCardInfo {
   id: number
   picUrl: string

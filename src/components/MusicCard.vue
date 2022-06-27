@@ -32,7 +32,9 @@ const getShadowStyle = computed((): StyleValue => {
 
 function goToPlaylist() {
   console.log(`gotoplaylist ${props.id}`)
-  router.push(`/playlistdetail/${props.id}`)
+  if (props.sectionName === 'Top Artists')
+    router.push(`/playlistdetail/${props.id}`)
+  else router.push(`/playlistdetail/${props.id}`)
 }
 function play() {
   console.log(`play ${props.id}`)

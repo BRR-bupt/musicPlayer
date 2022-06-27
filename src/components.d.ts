@@ -7,15 +7,16 @@ declare module 'vue' {
     FMCard: typeof import('./components/FMCard.vue')['default']
     Footer: typeof import('./components/Footer.vue')['default']
     ForYouSection: typeof import('./components/ForYouSection.vue')['default']
-    HelloWorld: typeof import('./components/HelloWorld.vue')['default']
     IconButton: typeof import('./components/IconButton.vue')['default']
     MusicCard: typeof import('./components/MusicCard.vue')['default']
     MusicSection: typeof import('./components/MusicSection.vue')['default']
     MusicSectionRow: typeof import('./components/MusicSectionRow.vue')['default']
     Navbar: typeof import('./components/Navbar.vue')['default']
     Player: typeof import('./components/Player.vue')['default']
+    PlaylistInfo: typeof import('./components/PlaylistInfo.vue')['default']
     PlaylistItem: typeof import('./components/PlaylistItem.vue')['default']
     RecommendCard: typeof import('./components/RecommendCard.vue')['default']
+    SearchTrackCard: typeof import('./components/SearchTrackCard.vue')['default']
   }
 }
 

@@ -7,7 +7,7 @@
     <Navbar />
     <div class="main">
       <router-view v-slot="{ Component }">
-        <keep-alive exclude="Playlist">
+        <keep-alive exclude="Playlist,Search">
           <component :is="Component" />
         </keep-alive>
       </router-view>

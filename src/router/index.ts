@@ -20,10 +20,12 @@ const routes = [
   {
     path: '/playlistdetail/:id',
     name: 'playlistdetail',
-    meta: {
-      keepAlive: false,
-    },
     component: () => import('../views/PlaylistDetail.vue'),
+  },
+  {
+    path: '/search/:keywords',
+    name: 'search',
+    component: () => import('../views/Search.vue'),
   },
 ]
 

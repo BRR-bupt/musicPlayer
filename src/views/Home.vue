@@ -66,9 +66,10 @@ async function loadData() {
   })
 }
 
-onMounted(async () => {
-  await loadData()
-})
+// onMounted(async () => {
+//   await loadData()
+// })
+loadData()
 </script>
 
 <template>

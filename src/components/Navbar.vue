@@ -40,6 +40,10 @@ function inputFocus() {
 function inputUnfocus() {
   focus.value = false
 }
+const keywords = ref('')
+function doSearch() {
+  router.push(`/search/${keywords.value}`)
+}
 </script>
 
 <template>
@@ -97,6 +101,7 @@ function inputUnfocus() {
         >
           <div i-carbon-search />
           <input
+            v-model="keywords"
             type="search"
             h-6 w-40
             font-bold
@@ -104,6 +109,7 @@ function inputUnfocus() {
             :placeholder="placeholder"
             @focus="inputFocus()"
             @blur="inputUnfocus()"
+            @keydown.enter="doSearch()"
           >
         </div>
         <button h-8 w-8 border-2 rounded-4>

@@ -7,7 +7,7 @@ const props = defineProps<{
 }>()
 
 function getImgUrl(item: MusicCardInfo) {
-  return item.picUrl
+  return `${item.picUrl}?param=512y512`
 }
 </script>
 

@@ -6,7 +6,7 @@ interface SongURLParams {
   ids: number
 }
 
-// 获取歌单或排行榜详情
+// 获取歌曲详情
 export function getSongDetail(params: SongURLParams) {
   return http.get('/song/detail', {
     params,
