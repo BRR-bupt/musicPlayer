@@ -1,29 +1,24 @@
 <script setup lang='ts'>
-import type { PlaylistDetail, SectionName } from '~/utils/model/interface'
-interface Props {
-  playlistDetail: PlaylistDetail
-  type?: 'artist' | 'playlist'
-}
+import type { Artist } from '~/utils/model/interface'
+defineProps<{
+  artist: Artist
+}>()
 
-const props = withDefaults(defineProps<Props>(), {
-  type: 'playlist',
-})
-
-const getMusicCardtype = computed((): SectionName => {
-  if (props.type === 'artist')
-    return 'Top Artists'
-  return 'Recommend'
-})
+// const getMusicCardtype = computed((): SectionName => {
+//   if (props.type === 'artist')
+//     return 'Top Artists'
+//   return 'Recommend'
+// })
 </script>
 
 <template>
-  <div class="playlist-info" mt-14 flex>
+  <div class="playlist-info" flex>
     <div class="cover-info" w-80 h-80>
       <MusicCard
-        :id="playlistDetail.id"
-        :img-url="playlistDetail.coverImgUrl"
+        :id="artist.id"
+        :img-url="artist.coverImgUrl"
         :show-shade="true"
-        :section-name="getMusicCardtype"
+        section-name="Top Artists"
       />
     </div>
     <div
@@ -34,13 +29,13 @@ const getMusicCardtype = computed((): SectionName => {
       ml-20
     >
       <h1 class="name" font-bold text-4xl>
-        {{ playlistDetail.name }}
+        {{ artist.name }}
       </h1>
       <h3 class="artist" text-xl mt-8>
-        Playlist by {{ playlistDetail.artist }}
+        艺人
       </h3>
       <h3 class="update-time" mt-1 text-gray-700 dark:text-gray-400>
-        最后更新于 {{ playlistDetail.updateTime }}
+        {{ artist.musicNum }} 首歌 · {{ artist.albumNum }} 张专辑 · {{ artist.mvNum }} 个MV
       </h3>
       <h3
         class="description hover:text-black hover:dark:text-gray-200"
@@ -48,7 +43,7 @@ const getMusicCardtype = computed((): SectionName => {
         text-gray-700 dark:text-gray-400
         cursor-pointer
       >
-        {{ playlistDetail.description }}
+        {{ artist.description }}
       </h3>
       <div
         class="control-button"
@@ -70,4 +65,11 @@ const getMusicCardtype = computed((): SectionName => {
 </template>
 
 <style scoped>
+.description {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 3;
+  overflow: hidden;
+  cursor: pointer;
+}
 </style>

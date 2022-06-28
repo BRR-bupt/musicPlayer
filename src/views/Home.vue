@@ -2,7 +2,7 @@
 import type { AxiosResponse } from 'axios'
 import { byAppleMusic } from '~/utils/staticData'
 import { getRecommendlist } from '~/api/recommendlist'
-import { getArtistList } from '~/api/artistlist'
+import { getArtistList } from '~/api/artist'
 import { getNewAlbum } from '~/api/album'
 import { getRankList } from '~/api/ranklist'
 import type { MusicCardInfo } from '~/utils/model/interface'

@@ -38,11 +38,23 @@ export interface Track {
   duringTime: number
 }
 
-export interface PlaylistDetail {
+export interface TrackslistInfo {
   id: number
   coverImgUrl: string
   name: string
-  artist: string
+  artistID?: number
+  artistName: string
   updateTime: number
   description: string
 }
+
+export interface Artist {
+  id: number
+  coverImgUrl: string
+  name: string
+  description: string
+  musicNum: number
+  albumNum: number
+  mvNum: number
+}
+

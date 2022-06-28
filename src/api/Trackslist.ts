@@ -13,9 +13,9 @@ export function getTarckOrRankDetail(params: PlaylistParams) {
   })
 }
 
-// 获取专辑详情
-export function getAlbumDetail(params: PlaylistParams) {
-  return http.get('/album/detail', {
-    params,
-  })
-}
+// // 获取专辑详情
+// export function getAlbumDetail(params: PlaylistParams) {
+//   return http.get('/album/detail', {
+//     params,
+//   })
+// }

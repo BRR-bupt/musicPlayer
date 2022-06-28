@@ -1,4 +1,5 @@
 <script setup lang='ts'>
+import { switchCase } from '@babel/types'
 import type { StyleValue } from 'vue'
 import type { SectionName } from '~/utils/model/interface'
 
@@ -10,7 +11,7 @@ interface Props {
 }
 
 const props = withDefaults(defineProps<Props>(), {
-  sectionName: 'New Album',
+  sectionName: 'Recommend',
   showShade: false,
 })
 
@@ -31,10 +32,24 @@ const getShadowStyle = computed((): StyleValue => {
 })
 
 function goToPlaylist() {
-  console.log(`gotoplaylist ${props.id}`)
-  if (props.sectionName === 'Top Artists')
-    router.push(`/playlistdetail/${props.id}`)
-  else router.push(`/playlistdetail/${props.id}`)
+  // console.log(`gotoplaylist ${props.id}`)
+  // if (props.sectionName === 'Top Artists')
+  //   router.push(`/artist/${props.id}`)
+  // else router.push(`/trackslist/${props.id}`)
+
+  switch (props.sectionName) {
+    case 'Top Artists':
+      router.push(`/artist/${props.id}`)
+      break
+
+    case 'New Album':
+      router.push(`/album/${props.id}`)
+      break
+
+    default:
+      router.push(`/trackslist/${props.id}`)
+      break
+  }
 }
 function play() {
   console.log(`play ${props.id}`)

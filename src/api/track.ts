@@ -3,7 +3,7 @@
 import http from '~/utils/request'
 
 interface SongURLParams {
-  ids: number
+  ids: number | string
 }
 
 // 获取歌曲详情

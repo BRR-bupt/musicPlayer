@@ -18,9 +18,19 @@ const routes = [
     component: () => import('../views/Library.vue'),
   },
   {
-    path: '/playlistdetail/:id',
-    name: 'playlistdetail',
-    component: () => import('../views/PlaylistDetail.vue'),
+    path: '/trackslist/:id',
+    name: 'trackslist',
+    component: () => import('../views/Trackslist.vue'),
+  },
+  {
+    path: '/artist/:id',
+    name: 'artist',
+    component: () => import('../views/Artist.vue'),
+  },
+  {
+    path: '/album/:id',
+    name: 'album',
+    component: () => import('../views/Album.vue'),
   },
   {
     path: '/search/:keywords',

@@ -4,6 +4,7 @@
 
 declare module 'vue' {
   export interface GlobalComponents {
+    ArtistInfo: typeof import('./components/ArtistInfo.vue')['default']
     FMCard: typeof import('./components/FMCard.vue')['default']
     Footer: typeof import('./components/Footer.vue')['default']
     ForYouSection: typeof import('./components/ForYouSection.vue')['default']
@@ -17,6 +18,8 @@ declare module 'vue' {
     PlaylistItem: typeof import('./components/PlaylistItem.vue')['default']
     RecommendCard: typeof import('./components/RecommendCard.vue')['default']
     SearchTrackCard: typeof import('./components/SearchTrackCard.vue')['default']
+    TrackslistInfo: typeof import('./components/TrackslistInfo.vue')['default']
+    TrackslistItem: typeof import('./components/TrackslistItem.vue')['default']
   }
 }
 

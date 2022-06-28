@@ -1,12 +1,13 @@
 <script setup lang='ts'>
+import { loadTracks } from '~/utils/loadTracks'
 import { getSearch } from '~/api/search'
 import type { MusicCardInfo, Track } from '~/utils/model/interface'
-import { useStore } from '~/store/project'
-import { getSongDetail, getSongURL } from '~/api/songUrl'
-const imgUrl = 'http://p1.music.126.net/9aCJYVD0JZ0NckqAn3a_3w==/109951165566993818.jpg'
+import { getSongDetail } from '~/api/track'
+import { changePlaylist } from '~/utils/changePlaylist'
+
 const router = useRouter()
 
-const store = useStore()
+// const store = useStore()
 
 const typeTable = {
   all: 1018,
@@ -52,42 +53,10 @@ async function loadData() {
   // console.log(artists.value)
 
   const tracksData = await Search('tracks', 16)
-  console.log(tracksData.data.result.songs)
-  // tracksData.data.result.songs.forEach(async (item: any) => {
-  //   // const data = await getSongDetail({ ids: item.id })
-  //   // console.log(data.data.songs[0].al.picUrl)
-  //   tracks.value.push({
-  //     id: item.id,
-  //     name: item.name,
-  //     alia: item.alias[0],
-  //     picUrl: item.album.picUrl,
-  //     artistID: item.artists[0].id,
-  //     artistName: item.artists[0].name,
-  //     albumID: item.album.id,
-  //     albumName: item.album.name,
-  //     duringTime: item.duration,
-  //   })
-  // })
-
-  // 由于forEach是异步操作，内部无法进行promise逻辑
-  // 解决方案一：使用for in替换，但这样的性能差，ajax耗时长
-  for (const i in tracksData.data.result.songs) {
-    const item = tracksData.data.result.songs[i]
-    const data = await getSongDetail({ ids: item.id })
-    console.log(data.data.songs[0])
-    tracks.value.push({
-      id: item.id,
-      name: item.name,
-      alia: item.alias[0],
-      picUrl: data.data.songs[0].al.picUrl,
-      artistID: item.artists[0].id,
-      artistName: item.artists[0].name,
-      albumID: item.album.id,
-      albumName: item.album.name,
-      duringTime: item.duration,
-    })
-  }
-  console.log(tracks.value)
+  const tracksIds = tracksData.data.result.songs.map((track: any) => track.id)
+  const ids = tracksIds.join(',')
+  const songs = await getSongDetail({ ids })
+  tracks.value = loadTracks(songs.data.songs)
 }
 
 function initData() {
@@ -103,6 +72,8 @@ function setImgSize(imgUrl: string) {
 watch(
   () => router.currentRoute.value.params.keywords,
   () => {
+    if (!router.currentRoute.value.params.keywords)
+      return
     initData()
     loadData()
   },
@@ -154,6 +125,7 @@ export default {
             <MusicCard
               :id="album.id"
               :img-url="setImgSize(album.picUrl)"
+              section-name="New Album"
             />
             <div mt-2>
               <h2>
@@ -179,7 +151,7 @@ export default {
         <SearchTrackCard
           v-for="(track, index) in tracks" :key="index"
           :track="track"
-          @click="store.currentMusicURL = getSongURL(track.id)"
+          @click="changePlaylist(tracks, track)"
         />
       </div>
     </div>
