@@ -3,7 +3,9 @@ import { loadTracks } from '~/utils/loadTracks'
 import { getSearch } from '~/api/search'
 import type { MusicCardInfo, Track } from '~/utils/model/interface'
 import { getSongDetail } from '~/api/track'
-import { changePlaylist } from '~/utils/changePlaylist'
+import { useStore } from '~/store/project'
+
+const store = useStore()
 
 const router = useRouter()
 
@@ -151,7 +153,7 @@ export default {
         <SearchTrackCard
           v-for="(track, index) in tracks" :key="index"
           :track="track"
-          @click="changePlaylist(tracks, track)"
+          @click="store.loadMusicIDList(tracks, track)"
         />
       </div>
     </div>

@@ -3,7 +3,9 @@ import { getTarckOrRankDetail } from '~/api/Trackslist'
 import { getSongURL } from '~/api/track'
 import type { Track, TrackslistInfo } from '~/utils/model/interface'
 import { loadTracks } from '~/utils/loadTracks'
-import { changePlaylist } from '~/utils/changePlaylist'
+import { useStore } from '~/store/project'
+
+const store = useStore()
 
 const router = useRouter()
 
@@ -54,7 +56,7 @@ export default {
       <TrackslistItem
         v-for="(track, i) in tracks" :key="i"
         :track="track"
-        @click="changePlaylist(tracks, track)"
+        @click="store.loadMusicIDList(tracks, track)"
       />
     </div>
   </div>
