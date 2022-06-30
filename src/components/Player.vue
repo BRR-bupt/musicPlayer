@@ -1,8 +1,23 @@
 <script setup lang='ts'>
+import VueSlider from 'vue-slider-component'
+import 'vue-slider-component/theme/antd.css'
 import { useStore } from '~/store/project'
 import Player from '~/utils/player'
 
 const store = useStore()
+
+const name = computed(() => {
+  if (!store.currentTrack.alia)
+    return store.currentTrack.name
+
+  return `${store.currentTrack.name} (${store.currentTrack.alia})`
+})
+
+const volume = ref(100)
+
+function setImgSize(imgUrl: string) {
+  return `${imgUrl}?param=224y224`
+}
 
 const player = new Player()
 
@@ -15,52 +30,80 @@ function playPre() {
   player._playAudioSource(store.preMusicUrl)
   store.changeToPreMusicID()
 }
+
+watch(() => store.currentMusicID, () => {
+  player._playAudioSource(store.currentMusicURL)
+})
+
+watch(() => volume.value, () => {
+  player.volume = volume.value / 100
+})
 </script>
 
 <template>
   <div
+    v-if="store.currentMusicID"
     class="player w-1/1 h-16"
     fixed right-0 left-0 bottom-0
     bg-gray-100
     dark:bg-hex-121212
   >
-    <div
+    <!-- <div
       class="process w-1/1 h-0.4"
       bg-gray-200
       dark:bg-gray-800
-    />
+    /> -->
+    <div class="process w-1/1 h-1">
+      <vue-slider
+        v-model="player.progress"
+        :min="0"
+        :max="player._duration.value"
+        :interval="1"
+        :height="1"
+        :dot-size="10"
+        :lazy="true"
+        :silent="true"
+        :drag-on-click="true"
+      />
+    </div>
+
     <div class="control h-1/1" px-40 grid grid-cols-3>
-      <div flex justify-center items-center>
-        11
+      <div flex justify-start items-center>
+        <img :src="setImgSize(store.currentTrack.picUrl)" class="h-10 aspect-1 rounded-2" alt="">
+        <div ml-4>
+          <h4>{{ name }}</h4>
+          <h4 text-xs text-gray-400 mt-1>
+            {{ store.currentTrack.artistName }}
+          </h4>
+        </div>
       </div>
-      <div flex justify-center items-center>
-        22
+      <div flex justify-center items-center gap-4>
+        <IconButton @click="playPre()">
+          <div i-fluent-previous-20-filled />
+        </IconButton>
+        <IconButton
+          v-if="!player._isPlay.value"
+          size="large"
+          @click="player._play()"
+        >
+          <div class="w-2/3 h-2/3" i-carbon-play-filled-alt />
+        </IconButton>
+        <IconButton
+          v-else
+          size="large"
+          @click="player._pause()"
+        >
+          <div class="w-3/4 h-3/4" i-carbon-pause-filled />
+        </IconButton>
+        <IconButton @click="playNext()">
+          <div i-fluent-next-20-filled />
+        </IconButton>
       </div>
-      <div flex gap-4>
-        <button @click="player._playAudioSource(store.currentMusicURL)">
-          load
-        </button>
-        <button @click="player._play()">
-          play
-        </button>
-        <button @click="player._pause()">
-          pause
-        </button>
-        <button @click="player._stop()">
-          stop
-        </button>
-        <button @click="playNext()">
-          next
-        </button>
-        <button @click="playPre()">
-          pre
-        </button>
-        <!-- <button @click="player._halfVolume()">
-          halfVloume
-        </button>
-        <button @click="player._MaxVolume()">
-          max-vloume
-        </button> -->
+      <div flex justify-end items-center gap-2>
+        <div i-carbon-volume-down-filled />
+        <div class="volume w-1/3">
+          <vue-slider v-model="volume" />
+        </div>
       </div>
     </div>
   </div>

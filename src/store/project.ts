@@ -8,7 +8,9 @@ export const useStore = defineStore('project', {
   // other options...
   state: () => ({
     currentMusicID: 0,
-    musicIDList: [0],
+    musicIDList: <number[]>[0],
+    currentTrack: <Track>{},
+    tracks: <Track[]>[],
   }),
   getters: {
     listIndex(): number {
@@ -35,11 +37,15 @@ export const useStore = defineStore('project', {
   actions: {
     changeToNextMusicID() {
       this.currentMusicID = this.nextMusicID
+      this.currentTrack = this.tracks[this.listIndex]
     },
     changeToPreMusicID() {
       this.currentMusicID = this.preMusicID
+      this.currentTrack = this.tracks[this.listIndex]
     },
     loadMusicIDList(tracks: Track[], currentTrack: Track) {
+      this.currentTrack = currentTrack
+      this.tracks = tracks
       // 存储当前 music id
       this.currentMusicID = currentTrack.id
 

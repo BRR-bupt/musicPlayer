@@ -56,7 +56,10 @@ export default {
 
 <template>
   <div class="artist" my-14>
-    <ArtistInfo :artist="artist" />
+    <ArtistInfo
+      :artist="artist"
+      @playlist="store.loadMusicIDList(tracks, tracks[0])"
+    />
 
     <div class="tracks" mt-14>
       <div class="title w-1/1" flex justify-between text-2xl font-bold mb-6>

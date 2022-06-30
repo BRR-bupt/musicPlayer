@@ -49,7 +49,10 @@ export default {
 
 <template>
   <div class="palylist-detail" my-14>
-    <TrackslistInfo :tracklist-info="trackslistInfo" />
+    <TrackslistInfo
+      :tracklist-info="trackslistInfo"
+      @playlist="store.loadMusicIDList(tracks, tracks[0])"
+    />
     <!-- 该模块消耗时间较长，需要优化 -->
     <!-- 设置img loading=lazy -->
     <div class="playlist-tracks" my-8>

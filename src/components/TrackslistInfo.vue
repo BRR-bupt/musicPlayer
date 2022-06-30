@@ -4,6 +4,10 @@ defineProps<{
   tracklistInfo: TrackslistInfo
 }>()
 
+const emit = defineEmits<{
+  (e: 'playlist'): void
+}>()
+
 // const getMusicCardtype = computed((): SectionName => {
 //   if (props.type === 'artist')
 //     return 'Top Artists'
@@ -49,9 +53,20 @@ defineProps<{
         flex gap-10
         absolute bottom-0
       >
-        <button border-1 rounded-1 p-2>
-          123
-        </button>
+        <div
+          flex gap-1 items-center
+          rounded-2
+          p-2
+          bg-green-500
+          cursor-pointer
+          hover:bg-green-400
+          @click="emit('playlist')"
+        >
+          <div i-carbon-play-filled-alt />
+          <h4 font-bold>
+            play
+          </h4>
+        </div>
         <button border-1 rounded-1 p-2>
           123
         </button>
