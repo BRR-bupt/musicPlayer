@@ -36,7 +36,7 @@ async function Search(type: TypeTable = 'all', limit = 30) {
 async function loadData() {
   const data = await Search('all')
   const result = data.data.result
-  // console.log(result)
+  // console.log(data)
   result.artist.artists.forEach((artist: any) => {
     artists.value.push({
       id: artist.id,

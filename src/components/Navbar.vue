@@ -20,8 +20,7 @@ const getHStyle = computed(() => {
   return function (route: string) {
     let str1 = ''
     let str2 = ''
-    if (!isDark.value)
-      str1 = 'hover:bg-gray-100'
+    str1 = 'hover:bg-gray-100 dark:hover:bg-gray-800'
     if (router.currentRoute.value.name === route)
       str2 = 'text-blue-600'
     return `${str1} ${str2}`

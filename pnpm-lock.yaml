@@ -22,6 +22,7 @@ specifiers:
   unplugin-vue-components: ^0.18.5
   vite: ^2.8.0
   vue: ^3.2.25
+  vue-lazyload: ^3.0.0-rc.2
   vue-router: ^4.0.15
   vue-slider-component: ^4.1.0-beta.0
   vue-tsc: ^0.29.8
@@ -33,6 +34,7 @@ dependencies:
   howler: registry.npmmirror.com/howler/2.2.3
   pinia: registry.npmmirror.com/pinia/2.0.12_typescript@4.6.3+vue@3.2.31
   vue: registry.npmmirror.com/vue/3.2.31
+  vue-lazyload: registry.npmmirror.com/vue-lazyload/3.0.0-rc.2
   vue-router: registry.npmmirror.com/vue-router/4.0.16_vue@3.2.31
   vue-slider-component: registry.npmmirror.com/vue-slider-component/4.1.0-beta.0
 
@@ -4820,6 +4822,12 @@ packages:
     transitivePeerDependencies:
       - supports-color
     dev: true
+
+  registry.npmmirror.com/vue-lazyload/3.0.0-rc.2:
+    resolution: {integrity: sha512-Cg7Gqb7jAoiImMPH3EMfAwJ8gZuFoBJCEtA7+TGRljrtktDtV7JAHIyKvuTgQR8DFAd7MhKi1Ys8QHdSrnGdZQ==, registry: http://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/vue-lazyload/-/vue-lazyload-3.0.0-rc.2.tgz}
+    name: vue-lazyload
+    version: 3.0.0-rc.2
+    dev: false
 
   registry.npmmirror.com/vue-router/4.0.16_vue@3.2.31:
     resolution: {integrity: sha512-JcO7cb8QJLBWE+DfxGUL3xUDOae/8nhM1KVdnudadTAORbuxIC/xAydC5Zr/VLHUDQi1ppuTF5/rjBGzgzrJNA==, registry: http://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/vue-router/-/vue-router-4.0.16.tgz}

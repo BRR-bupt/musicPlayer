@@ -36,6 +36,7 @@ export interface Track {
   albumID: number
   albumName: string
   duringTime: number
+  fee: number
 }
 
 export interface TrackslistInfo {

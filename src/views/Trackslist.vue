@@ -23,7 +23,7 @@ const tracks = ref<Track[]>([])
 async function loadData() {
   const data = await getTarckOrRankDetail({ id: trackslistInfo.id })
 
-  // console.log(data)
+  console.log(data.data.playlist.tracks)
 
   trackslistInfo.name = data.data.playlist.name
   trackslistInfo.coverImgUrl = data.data.playlist.coverImgUrl
@@ -33,7 +33,7 @@ async function loadData() {
 
   // 考虑采用for in实现。因为forEach是异步的，数据全部操作完，才能对完整的tracks渲染
   tracks.value = loadTracks(data.data.playlist.tracks, 0)
-  // console.log(tracks.value)
+  console.log(tracks.value)
 }
 
 trackslistInfo.id = Number(router.currentRoute.value.params.id)

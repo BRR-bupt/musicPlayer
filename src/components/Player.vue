@@ -6,11 +6,17 @@ import Player from '~/utils/player'
 
 const store = useStore()
 
-const name = computed(() => {
-  if (!store.currentTrack.alia)
-    return store.currentTrack.name
+// const name = computed(() => {
+//   if (!store.currentTrack.alia)
+//     return store.currentTrack.name
 
-  return `${store.currentTrack.name} (${store.currentTrack.alia})`
+//   return `${store.currentTrack.name} (${store.currentTrack.alia})`
+// })
+
+const getSubTextStyle = computed(() => {
+  if (store.currentTrack.fee === 0 || store.currentTrack.fee === 8)
+    return 'text-gray-400'
+  else return 'text-gray-600'
 })
 
 const volume = ref(100)
@@ -22,17 +28,20 @@ function setImgSize(imgUrl: string) {
 const player = new Player()
 
 function playNext() {
-  player._playAudioSource(store.nextMusicUrl)
+  // player._playAudioSource(store.nextMusicUrl)
   store.changeToNextMusicID()
 }
 
 function playPre() {
-  player._playAudioSource(store.preMusicUrl)
+  // player._playAudioSource(store.preMusicUrl)
   store.changeToPreMusicID()
 }
 
 watch(() => store.currentMusicID, () => {
-  player._playAudioSource(store.currentMusicURL)
+  console.log('watch lllllllll')
+  if (store.currentTrack.fee === 0 || store.currentTrack.fee === 8)
+    player._playAudioSource(store.currentMusicURL)
+  else store.changeToNextMusicID()
 })
 
 watch(() => volume.value, () => {
@@ -48,11 +57,6 @@ watch(() => volume.value, () => {
     bg-gray-100
     dark:bg-hex-121212
   >
-    <!-- <div
-      class="process w-1/1 h-0.4"
-      bg-gray-200
-      dark:bg-gray-800
-    /> -->
     <div class="process w-1/1 h-1">
       <vue-slider
         v-model="player.progress"
@@ -71,7 +75,9 @@ watch(() => volume.value, () => {
       <div flex justify-start items-center>
         <img :src="setImgSize(store.currentTrack.picUrl)" class="h-10 aspect-1 rounded-2" alt="">
         <div ml-4>
-          <h4>{{ name }}</h4>
+          <h4 class="title">
+            {{ store.currentTrack.name }} <span v-if="store.currentTrack.alia" :class="getSubTextStyle">({{ store.currentTrack.alia }})</span>
+          </h4>
           <h4 text-xs text-gray-400 mt-1>
             {{ store.currentTrack.artistName }}
           </h4>
@@ -119,5 +125,11 @@ watch(() => volume.value, () => {
 .control {
   padding: 0rem 1rem;
 }
+}
+.title {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 1;
+  overflow: hidden;
 }
 </style>

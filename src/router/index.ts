@@ -43,5 +43,11 @@ export default function (history: any) {
   return createRouter({
     history,
     routes,
+    // scrollBehavior(to, from, savePosition) {
+    //   if (savePosition)
+    //     return savePosition
+    //   else
+    //     return { top: 0 }
+    // },
   })
 }

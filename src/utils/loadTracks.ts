@@ -20,6 +20,7 @@ export function loadTracks(tmp: any[], length = 16): Track[] {
         albumID: track.al.id,
         albumName: track.al.name,
         duringTime: track.dt,
+        fee: track.fee,
       })
     })
   }
@@ -37,6 +38,7 @@ export function loadTracks(tmp: any[], length = 16): Track[] {
         albumID: track.al.id,
         albumName: track.al.name,
         duringTime: track.dt,
+        fee: track.fee,
       })
     })
   }

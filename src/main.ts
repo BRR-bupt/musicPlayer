@@ -2,8 +2,9 @@ import { createApp } from 'vue'
 import ElementPlus from 'element-plus'
 import { createPinia } from 'pinia'
 import { createWebHistory } from 'vue-router'
-import createRouter from './router/index'
+import VueLazyload from 'vue-lazyload'
 import App from './App.vue'
+import createRouter from './router/index'
 
 import './styles/main.css'
 import 'uno.css'
@@ -16,6 +17,7 @@ const app = createApp(App)
 app.use(router)
 app.use(ElementPlus, { size: 'large', zIndex: 3000 })
 app.use(createPinia())
+app.use(VueLazyload)
 
 app.mount('#app')
 
