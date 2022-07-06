@@ -1,6 +1,5 @@
 <script setup lang='ts'>
 import { getTarckOrRankDetail } from '~/api/Trackslist'
-import { getSongURL } from '~/api/track'
 import type { Track, TrackslistInfo } from '~/utils/model/interface'
 import { loadTracks } from '~/utils/loadTracks'
 import { useStore } from '~/store/project'

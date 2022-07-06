@@ -1,4 +1,4 @@
-import { createRouter } from 'vue-router'
+import { createRouter, createWebHistory } from 'vue-router'
 // import Home from '../views/Home.vue'
 
 const routes = [
@@ -16,6 +16,16 @@ const routes = [
     path: '/library',
     name: 'library',
     component: () => import('../views/Library.vue'),
+  },
+  {
+    path: '/login',
+    name: 'login',
+    component: () => import('../views/Login.vue'),
+  },
+  {
+    path: '/user/:id',
+    name: 'user',
+    component: () => import('../views/User.vue'),
   },
   {
     path: '/trackslist/:id',
@@ -39,15 +49,14 @@ const routes = [
   },
 ]
 
-export default function (history: any) {
-  return createRouter({
-    history,
-    routes,
-    // scrollBehavior(to, from, savePosition) {
-    //   if (savePosition)
-    //     return savePosition
-    //   else
-    //     return { top: 0 }
-    // },
-  })
-}
+const router = createRouter({
+  history: createWebHistory(),
+  routes,
+})
+
+router.beforeEach((to) => {
+  if (!localStorage.getItem('cookie') && to.name === 'user')
+    return { name: 'login' }
+})
+
+export default router

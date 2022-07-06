@@ -1,6 +1,8 @@
 <script setup lang='ts'>
 import type { StyleValue } from 'vue'
 import { isDark, toggleDark } from '~/composables/index'
+import { useStore } from '~/store/project'
+const store = useStore()
 const router = useRouter()
 
 const focus = ref(false)
@@ -42,6 +44,10 @@ function inputUnfocus() {
 const keywords = ref('')
 function doSearch() {
   router.push(`/search/${keywords.value}`)
+}
+
+function toUser() {
+  router.push(`/user/${localStorage.getItem('uid')}`)
 }
 </script>
 
@@ -111,8 +117,14 @@ function doSearch() {
             @keydown.enter="doSearch()"
           >
         </div>
-        <button h-8 w-8 border-2 rounded-4>
-          u
+        <button
+          flex justify-center items-center
+          h-8 w-8
+          bg-gray-2 dark:bg-gray-6
+          rounded-4 @click="toUser()"
+        >
+          <img v-if="store.isLogin" :src="store.user.avatarUrl" class="rounded-1/2" alt="">
+          <div v-else i-carbon-user />
         </button>
       </div>
     </nav>

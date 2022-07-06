@@ -132,7 +132,7 @@ class Player implements IPlayer {
         return
       console.log('timer')
       this._progress.value = this._sound.seek()
-      // localStorage.setItem('playerCurrentTrackTime', this._progress)
+      localStorage.setItem('playerCurrentTrackTime', this._progress.value.toString())
     }, 1000)
   }
 }

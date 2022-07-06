@@ -1,5 +1,4 @@
 <script setup lang='ts'>
-import { switchCase } from '@babel/types'
 import type { StyleValue } from 'vue'
 import type { SectionName } from '~/utils/model/interface'
 
@@ -26,7 +25,7 @@ const focus = ref(false)
 const getShadowStyle = computed((): StyleValue => {
   const styles: StyleValue = {}
   styles.backgroundImage = `url(${getImgUrl.value})`
-  if (props.sectionName === 'Top Artists')
+  if (props.sectionName === 'Top Artists' || props.sectionName === 'User')
     styles.borderRadius = '50%'
   return styles
 })
@@ -44,6 +43,9 @@ function goToPlaylist() {
 
     case 'New Album':
       router.push(`/album/${props.id}`)
+      break
+
+    case 'User':
       break
 
     default:
@@ -64,7 +66,7 @@ function play() {
     @mouseleave="focus = false"
     @click="goToPlaylist()"
   >
-    <img :src="getImgUrl" alt="" :class="sectionName === 'Top Artists' ? 'rounded-1/2' : 'rounded-2'">
+    <img :src="getImgUrl" alt="" :class="sectionName === 'Top Artists' || sectionName === 'User' ? 'rounded-1/2' : 'rounded-2'">
 
     <div
       v-show="focus"

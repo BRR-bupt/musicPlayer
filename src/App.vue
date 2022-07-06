@@ -1,5 +1,24 @@
 <script setup lang="ts">
+import { getUserDetail } from '~/api/user'
+import { useStore } from '~/store/project'
+const store = useStore()
 
+async function loadData() {
+  if (localStorage.getItem('uid')) {
+    store.isLogin = true
+    store.user.id = Number(localStorage.getItem('uid'))
+    const data = await getUserDetail(store.user.id)
+    const profile = data.data.profile
+    store.user.avatarUrl = profile.avatarUrl
+    store.user.level = data.data.level
+    store.user.name = profile.nickname
+    store.user.followeds = profile.followeds
+    store.user.follows = profile.follows
+    store.user.signature = profile.signature
+  }
+}
+
+loadData()
 </script>
 
 <template>

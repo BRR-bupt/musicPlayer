@@ -51,7 +51,9 @@ const formatTime = computed(() => {
       flex flex-col flex-1
       mx-4
     >
-      <h4>{{ track.name }} <span v-if="track.alia" :class="getSubTextStyle">({{ track.alia }})</span></h4>
+      <h4 class="title">
+        {{ track.name }} <span v-if="track.alia" :class="getSubTextStyle">({{ track.alia }})</span>
+      </h4>
       <h4 :class="getSubTextStyle">
         {{ track.artistName }}
       </h4>
@@ -59,11 +61,17 @@ const formatTime = computed(() => {
     <div class="name" flex flex-1>
       {{ track.albumName }}
     </div>
-    <div class="during-time">
+    <div ml-2 class="during-time">
       {{ formatTime }}
     </div>
   </div>
 </template>
 
 <style scoped>
+.title {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  overflow: hidden;
+}
 </style>

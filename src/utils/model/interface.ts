@@ -1,21 +1,3 @@
-// interface BaseTrackInfo {
-//   id: number
-//   picUrl: string
-//   name: string
-// }
-
-// export interface ByAppleMusic extends BaseTrackInfo {
-//   subText: string
-// }
-
-// export interface RankList extends BaseTrackInfo {
-//   updateFrequency: string
-// }
-
-// export interface NewAlbum extends BaseTrackInfo {
-//   artistName: string
-// }
-
 // 各类卡片信息，如歌单、艺人、专辑、排行榜卡片均使用此接口
 export interface MusicCardInfo {
   id: number
@@ -24,7 +6,7 @@ export interface MusicCardInfo {
   subText?: string
 }
 
-export type SectionName = 'By Apple Music' | 'Recommend' | 'For You' | 'Top Artists' | 'New Album' | 'Rank List'
+export type SectionName = 'User' | 'By Apple Music' | 'Recommend' | 'For You' | 'Top Artists' | 'New Album' | 'Rank List'
 
 export interface Track {
   id: number
@@ -57,5 +39,23 @@ export interface Artist {
   musicNum: number
   albumNum: number
   mvNum: number
+}
+
+export interface User {
+  id: number
+  name: string
+  avatarUrl: string
+  level: number
+  followeds: number
+  follows: number
+  signature: string
+}
+
+export interface LoveTracks {
+  id: number
+  name: string
+  tracksCount: number
+  coverImgUrl: string
+  updateTime: number
 }
 

@@ -9,9 +9,9 @@ const props = withDefaults(defineProps<Props>(), {
 
 const getStyle = computed(() => {
   if (props.size === 'medium')
-    return 'icon-button h-8 w-8'
+    return 'icon-button h-8 w-8 dark:hover:bg-gray-6'
   else if (props.size === 'large')
-    return 'icon-button h-10 w-10'
+    return 'icon-button h-10 w-10 dark:hover:bg-gray-6'
 })
 </script>
 
@@ -21,7 +21,7 @@ const getStyle = computed(() => {
     flex justify-center items-center
     rounded-2
     cursor-pointer
-    hover:bg-gray-600
+    hover:bg-gray-2
   >
     <slot />
   </div>

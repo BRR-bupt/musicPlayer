@@ -38,7 +38,10 @@ function playPre() {
 }
 
 watch(() => store.currentMusicID, () => {
-  console.log('watch lllllllll')
+  if (!store.currentMusicID) {
+    player._stop()
+    return
+  }
   if (store.currentTrack.fee === 0 || store.currentTrack.fee === 8)
     player._playAudioSource(store.currentMusicURL)
   else store.changeToNextMusicID()
@@ -54,7 +57,7 @@ watch(() => volume.value, () => {
     v-if="store.currentMusicID"
     class="player w-1/1 h-16"
     fixed right-0 left-0 bottom-0
-    bg-gray-100
+    bg-white
     dark:bg-hex-121212
   >
     <div class="process w-1/1 h-1">
@@ -64,7 +67,7 @@ watch(() => volume.value, () => {
         :max="player._duration.value"
         :interval="1"
         :height="1"
-        :dot-size="10"
+        :dot-size="8"
         :lazy="true"
         :silent="true"
         :drag-on-click="true"
