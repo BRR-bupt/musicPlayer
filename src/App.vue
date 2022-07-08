@@ -24,7 +24,7 @@ loadData()
 <template>
   <main font-sans select-none px-40 py-12>
     <Navbar />
-    <div class="main">
+    <div id="main" class="main">
       <router-view v-slot="{ Component }">
         <keep-alive exclude="Trackslist,Search,Artist,Album">
           <component :is="Component" />

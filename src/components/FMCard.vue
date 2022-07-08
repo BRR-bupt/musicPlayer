@@ -1,8 +1,17 @@
 <script setup lang='ts'>
-const text = ref('示例标题')
-const subtext = ref('示例标题')
+import { getPersonalFM } from '~/api/user'
+const text = ref('私人FM')
+const subtext = ref('待开发')
 
 const coverImg = ref('https://p3.music.126.net/T8KLtFV8FFLoRsf4X1QknA==/109951167527514863.jpg?param=512y512')
+
+// async function loadData() {
+//   const data = await getPersonalFM()
+//   console.log(data.data.data)
+//   const tracksTmp = data.data.data
+// }
+
+// loadData()
 </script>
 
 <template>
@@ -43,10 +52,10 @@ const coverImg = ref('https://p3.music.126.net/T8KLtFV8FFLoRsf4X1QknA==/10995116
         flex gap-2
       >
         <IconButton>
-          <div i-carbon-timer />
+          <div i-carbon-play-filled-alt />
         </IconButton>
         <IconButton>
-          <div i-carbon-timer />
+          <div i-carbon-play />
         </IconButton>
         <IconButton>
           <div i-carbon-timer />

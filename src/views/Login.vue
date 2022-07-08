@@ -1,6 +1,5 @@
 <script setup lang='ts'>
 import type { AxiosResponse } from 'axios'
-import QRCode from 'qrcode'
 import { checkLogin, checkQRstate, generationQR, generationQRkey, phoneLogin } from '~/api/user'
 
 type loginMode = 'QR' | 'PHONE' | 'MAIL'
@@ -57,12 +56,13 @@ async function checkQR() {
       await loadQR()
     }
     else if (QRstate.data.code === 803) {
+      const cookie = QRstate.data.cookie as string
       clearInterval(checkTimer)
       console.log('success')
-      const loginInfo = await checkLogin(QRstate.data.cookie)
+      const loginInfo = await checkLogin(cookie)
       console.log(loginInfo.data.data)
       localStorage.setItem('uid', loginInfo.data.data.account.id)
-      localStorage.setItem('cookie', QRstate.data.cookie)
+      localStorage.setItem('cookie', cookie)
       router.push(`/user/${loginInfo.data.data.account.id}`)
     }
   }, 1000)

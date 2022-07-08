@@ -18,6 +18,11 @@ const routes = [
     component: () => import('../views/Library.vue'),
   },
   {
+    path: '/everydaysongs',
+    name: 'everydaysongs',
+    component: () => import('../views/EverydaySongs.vue'),
+  },
+  {
     path: '/login',
     name: 'login',
     component: () => import('../views/Login.vue'),
@@ -55,7 +60,7 @@ const router = createRouter({
 })
 
 router.beforeEach((to) => {
-  if (!localStorage.getItem('cookie') && to.name === 'user')
+  if (!localStorage.getItem('cookie') && (to.name === 'user' || to.name === 'everydaysongs'))
     return { name: 'login' }
 })
 

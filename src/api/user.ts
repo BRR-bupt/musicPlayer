@@ -61,3 +61,11 @@ export function checkLogin(cookie: string) {
 export function signOut() {
   return http.get('/logout')
 }
+
+export function getRecommendSongs() {
+  return http.get('/recommend/songs')
+}
+
+export function getPersonalFM() {
+  return http.get('/personal_fm')
+}

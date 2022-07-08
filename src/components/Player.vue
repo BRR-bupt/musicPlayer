@@ -1,17 +1,11 @@
 <script setup lang='ts'>
+import { stringTypeAnnotation } from '@babel/types'
 import VueSlider from 'vue-slider-component'
 import 'vue-slider-component/theme/antd.css'
 import { useStore } from '~/store/project'
 import Player from '~/utils/player'
 
 const store = useStore()
-
-// const name = computed(() => {
-//   if (!store.currentTrack.alia)
-//     return store.currentTrack.name
-
-//   return `${store.currentTrack.name} (${store.currentTrack.alia})`
-// })
 
 const getSubTextStyle = computed(() => {
   if (store.currentTrack.fee === 0 || store.currentTrack.fee === 8)
@@ -27,12 +21,15 @@ function setImgSize(imgUrl: string) {
 
 const player = new Player()
 
+let PreOrNext: 'PRE' | 'NEXT' = 'NEXT'
 function playNext() {
+  PreOrNext = 'NEXT'
   // player._playAudioSource(store.nextMusicUrl)
   store.changeToNextMusicID()
 }
 
 function playPre() {
+  PreOrNext = 'PRE'
   // player._playAudioSource(store.preMusicUrl)
   store.changeToPreMusicID()
 }
@@ -42,9 +39,13 @@ watch(() => store.currentMusicID, () => {
     player._stop()
     return
   }
-  if (store.currentTrack.fee === 0 || store.currentTrack.fee === 8)
-    player._playAudioSource(store.currentMusicURL)
-  else store.changeToNextMusicID()
+  if (store.currentTrack.fee === 0 || store.currentTrack.fee === 8) { player._playAudioSource(store.currentMusicURL) }
+  else {
+    if (PreOrNext === 'NEXT')
+      store.changeToNextMusicID()
+
+    else store.changeToPreMusicID()
+  }
 })
 
 watch(() => volume.value, () => {

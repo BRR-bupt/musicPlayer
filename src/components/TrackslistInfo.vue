@@ -1,8 +1,13 @@
 <script setup lang='ts'>
 import type { TrackslistInfo } from '~/utils/model/interface'
-defineProps<{
+interface Props {
   tracklistInfo: TrackslistInfo
-}>()
+  type?: 'default' | 'dailySongs'
+}
+
+const props = withDefaults(defineProps<Props>(), {
+  type: 'default',
+})
 
 const emit = defineEmits<{
   (e: 'playlist'): void
@@ -22,6 +27,7 @@ const emit = defineEmits<{
         :id="tracklistInfo.id"
         :img-url="tracklistInfo.coverImgUrl"
         :show-shade="true"
+        :type="props.type"
       />
     </div>
     <div
@@ -38,7 +44,7 @@ const emit = defineEmits<{
         Playlist by {{ tracklistInfo.artistName }}
       </h3>
       <h3 class="update-time" mt-1 text-gray-700 dark:text-gray-400>
-        最后更新于 {{ tracklistInfo.updateTime }}
+        最后更新于 {{ tracklistInfo.updateTime ? tracklistInfo.updateTime : '今天' }}
       </h3>
       <h3
         class="description hover:text-black hover:dark:text-gray-200"

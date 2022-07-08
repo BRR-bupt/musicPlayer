@@ -5,6 +5,8 @@ const props = defineProps<{
   sectionName: SectionName
   items: MusicCardInfo[]
 }>()
+
+const router = useRouter()
 </script>
 
 <template>
@@ -16,7 +18,9 @@ const props = defineProps<{
       class="ForYouSectionRow" my-6 gap-x-6 gap-y-8
       grid grid-cols-2
     >
-      <RecommendCard />
+      <RecommendCard
+        @click="router.push('/everydaysongs')"
+      />
       <FMCard />
     </div>
   </div>

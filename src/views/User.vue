@@ -63,7 +63,7 @@ onActivated(async () => {
 //   console.log(await checkLogin(localStorage.getItem('cookie') as string))
 // }
 async function logout() {
-  console.log(await signOut())
+  await signOut()
   store.$reset()
   console.log(store.$state)
   localStorage.removeItem('uid')

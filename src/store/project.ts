@@ -33,6 +33,8 @@ export const useStore = defineStore('project', {
       return getSongURL(this.currentMusicID)
     },
     nextMusicID(): number {
+      if (this.currentMusicID === this.musicIDList[-1])
+        return this.currentMusicID
       return this.musicIDList[this.listIndex + 1]
     },
     nextMusicUrl(): string {

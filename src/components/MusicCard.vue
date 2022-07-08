@@ -7,11 +7,13 @@ interface Props {
   sectionName?: SectionName
   imgUrl: string
   showShade?: boolean
+  type?: 'default' | 'dailySongs'
 }
 
 const props = withDefaults(defineProps<Props>(), {
   sectionName: 'Recommend',
   showShade: false,
+  type: 'default',
 })
 
 const getImgUrl = computed(() => {
@@ -31,10 +33,8 @@ const getShadowStyle = computed((): StyleValue => {
 })
 
 function goToPlaylist() {
-  // console.log(`gotoplaylist ${props.id}`)
-  // if (props.sectionName === 'Top Artists')
-  //   router.push(`/artist/${props.id}`)
-  // else router.push(`/trackslist/${props.id}`)
+  if (props.type === 'dailySongs')
+    return
 
   switch (props.sectionName) {
     case 'Top Artists':
