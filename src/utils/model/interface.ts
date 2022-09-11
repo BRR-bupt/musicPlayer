@@ -4,6 +4,7 @@ export interface MusicCardInfo {
   picUrl: string
   name: string
   subText?: string
+  playCount?: number
 }
 
 export type SectionName = 'User' | 'By Apple Music' | 'Recommend' | 'For You' | 'Top Artists' | 'New Album' | 'Rank List'

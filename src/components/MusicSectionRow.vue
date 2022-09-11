@@ -20,6 +20,10 @@ function getImgUrl(item: MusicCardInfo) {
       v-for="(item, index) in items" :key="index"
     >
       <MusicCard :id="item.id" :section-name="sectionName" :img-url="getImgUrl(item)" />
+      <div v-if="item.playCount" class="play-count" text-xs text-gray-400 mt-1 flex>
+        <div i-carbon-play />
+        {{ item.playCount }}万
+      </div>
       <div
         class="text" font-bold text-4 mt-2
         :class="sectionName === 'Top Artists' ? 'text-center' : ''"

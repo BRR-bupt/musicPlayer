@@ -16,6 +16,7 @@ declare module 'vue' {
     Player: typeof import('./components/Player.vue')['default']
     RecommendCard: typeof import('./components/RecommendCard.vue')['default']
     SearchTrackCard: typeof import('./components/SearchTrackCard.vue')['default']
+    TextButton: typeof import('./components/TextButton.vue')['default']
     TrackslistInfo: typeof import('./components/TrackslistInfo.vue')['default']
     TrackslistItem: typeof import('./components/TrackslistItem.vue')['default']
   }

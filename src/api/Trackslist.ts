@@ -13,6 +13,16 @@ export function getTarckOrRankDetail(params: PlaylistParams) {
   })
 }
 
+export function getHighQualityTracks(cat?: string, limit?: number, before?: number) {
+  return http.get('/top/playlist/highquality', {
+    params: {
+      cat,
+      limit,
+      before,
+    },
+  })
+}
+
 // // 获取专辑详情
 // export function getAlbumDetail(params: PlaylistParams) {
 //   return http.get('/album/detail', {
