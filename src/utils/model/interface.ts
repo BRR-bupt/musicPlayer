@@ -60,3 +60,8 @@ export interface LoveTracks {
   updateTime: number
 }
 
+export interface CatInfo {
+  name: string
+  enable: boolean
+  bigCat: string
+}
