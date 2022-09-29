@@ -21,6 +21,7 @@ const getStyle = computed(() => {
     flex justify-center items-center
     rounded-2
     cursor-pointer
+    duration-200
     hover:bg-gray-2
   >
     <slot />

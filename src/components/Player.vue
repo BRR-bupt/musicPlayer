@@ -1,5 +1,4 @@
 <script setup lang='ts'>
-import { stringTypeAnnotation } from '@babel/types'
 import VueSlider from 'vue-slider-component'
 import 'vue-slider-component/theme/antd.css'
 import { useStore } from '~/store/project'
@@ -51,6 +50,12 @@ watch(() => store.currentMusicID, () => {
 watch(() => volume.value, () => {
   player.volume = volume.value / 100
 })
+
+defineExpose({
+  playPre,
+  playNext,
+  player,
+})
 </script>
 
 <template>
@@ -60,10 +65,12 @@ watch(() => volume.value, () => {
     fixed right-0 left-0 bottom-0
     bg-white
     dark:bg-hex-121212
+    @click.stop="store.showLyrics = !store.showLyrics"
   >
     <div class="process w-1/1 h-1">
       <vue-slider
         v-model="player.progress"
+        cursor-pointer
         :min="0"
         :max="player._duration.value"
         :interval="1"
@@ -72,6 +79,7 @@ watch(() => volume.value, () => {
         :lazy="true"
         :silent="true"
         :drag-on-click="true"
+        @click.stop=""
       />
     </div>
 
@@ -88,31 +96,31 @@ watch(() => volume.value, () => {
         </div>
       </div>
       <div flex justify-center items-center gap-4>
-        <IconButton @click="playPre()">
+        <IconButton @click.stop="playPre()">
           <div i-fluent-previous-20-filled />
         </IconButton>
         <IconButton
           v-if="!player._isPlay.value"
           size="large"
-          @click="player._play()"
+          @click.stop="player._play()"
         >
           <div class="w-2/3 h-2/3" i-carbon-play-filled-alt />
         </IconButton>
         <IconButton
           v-else
           size="large"
-          @click="player._pause()"
+          @click.stop="player._pause()"
         >
           <div class="w-3/4 h-3/4" i-carbon-pause-filled />
         </IconButton>
-        <IconButton @click="playNext()">
+        <IconButton @click.stop="playNext()">
           <div i-fluent-next-20-filled />
         </IconButton>
       </div>
       <div flex justify-end items-center gap-2>
         <div i-carbon-volume-down-filled />
         <div class="volume w-1/3">
-          <vue-slider v-model="volume" />
+          <vue-slider v-model="volume" @click.stop />
         </div>
       </div>
     </div>

@@ -12,6 +12,7 @@ import '@unocss/reset/tailwind.css'
 
 // const router = createRouter(createWebHistory())
 
+// 创建vue实例app
 const app = createApp(App)
 
 app.use(router)

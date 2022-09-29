@@ -81,6 +81,7 @@ class Player implements IPlayer {
       onload: () => {
         console.log(this._sound?.duration())
         this._duration.value = Math.ceil(this._sound!.duration())
+        store.duration = this._duration.value
       },
       onend: () => {
         this._isPlay.value = false
@@ -101,18 +102,21 @@ class Player implements IPlayer {
     console.log('play')
     this._sound?.play()
     this._isPlay.value = true
+    store.isPlaying = true
   }
 
   _pause() {
     console.log('pause')
     this._sound?.pause()
     this._isPlay.value = false
+    store.isPlaying = false
   }
 
   _stop() {
     console.log('stop')
     this._sound?.stop()
     this._isPlay.value = false
+    store.isPlaying = false
   }
 
   _seek(value: number) {
@@ -132,6 +136,7 @@ class Player implements IPlayer {
         return
       console.log('timer')
       this._progress.value = this._sound.seek()
+      store.prograss = this.progress
       localStorage.setItem('playerCurrentTrackTime', this._progress.value.toString())
     }, 1000)
   }

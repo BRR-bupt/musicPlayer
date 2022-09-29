@@ -118,6 +118,7 @@ async function logout() {
       flex my-12
       bg-gray-1 dark:bg-gray-8
       p-2 rounded-2
+      duration-200
       @click="router.push(`/trackslist/${loveTracks.id}`)"
     >
       <img v-lazy="loveTracks.coverImgUrl" alt="" class="h-1/1" rounded>

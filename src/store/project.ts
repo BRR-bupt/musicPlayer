@@ -21,6 +21,10 @@ export const useStore = defineStore('project', {
       signature: '',
     },
     isLogin: false,
+    showLyrics: false,
+    isPlaying: false,
+    prograss: 0,
+    duration: 0,
   }),
   getters: {
     // isLogin(): boolean {
@@ -33,8 +37,9 @@ export const useStore = defineStore('project', {
       return getSongURL(this.currentMusicID)
     },
     nextMusicID(): number {
-      if (this.currentMusicID === this.musicIDList[-1])
+      if (!this.musicIDList[this.listIndex + 1])
         return this.currentMusicID
+
       return this.musicIDList[this.listIndex + 1]
     },
     nextMusicUrl(): string {

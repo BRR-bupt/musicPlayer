@@ -16,3 +16,11 @@ export function getSongDetail(params: SongURLParams) {
 export function getSongURL(id: number) {
   return `https://music.163.com/song/media/outer/url?id=${id.toString()}`
 }
+
+export function getLyrics(id: number) {
+  return http.get('/lyric', {
+    params: {
+      id,
+    },
+  })
+}

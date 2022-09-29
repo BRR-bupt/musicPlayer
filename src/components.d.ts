@@ -9,6 +9,7 @@ declare module 'vue' {
     Footer: typeof import('./components/Footer.vue')['default']
     ForYouSection: typeof import('./components/ForYouSection.vue')['default']
     IconButton: typeof import('./components/IconButton.vue')['default']
+    Lyrics: typeof import('./components/Lyrics.vue')['default']
     MusicCard: typeof import('./components/MusicCard.vue')['default']
     MusicSection: typeof import('./components/MusicSection.vue')['default']
     MusicSectionRow: typeof import('./components/MusicSectionRow.vue')['default']

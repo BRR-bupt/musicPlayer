@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import type Player from './components/Player.vue'
+import FMCardVue from './components/FMCard.vue'
 import { getUserDetail } from '~/api/user'
 import { useStore } from '~/store/project'
 const store = useStore()
@@ -19,6 +21,20 @@ async function loadData() {
 }
 
 loadData()
+
+const player = ref<typeof Player>()
+function playPre() {
+  player.value?.playPre()
+}
+function playNext() {
+  player.value?.playNext()
+}
+function pause() {
+  player.value?.player._pause()
+}
+function play() {
+  player.value?.player._play()
+}
 </script>
 
 <template>
@@ -31,7 +47,16 @@ loadData()
         </keep-alive>
       </router-view>
     </div>
-    <Player />
+    <Player ref="player" />
+    <Transition name="slide-up">
+      <Lyrics
+        v-show="store.showLyrics"
+        @play-pre="playPre"
+        @play-next="playNext"
+        @play="play"
+        @pause="pause"
+      />
+    </Transition>
   </main>
 </template>
 
@@ -45,5 +70,14 @@ main {
 main {
   padding: 3rem 1rem;
 }
+}
+
+.slide-up-enter-active,
+.slide-up-leave-active {
+  transition: all 0.4s;
+}
+.slide-up-enter-from,
+.slide-up-leave-to {
+  transform: translateY(100%);
 }
 </style>

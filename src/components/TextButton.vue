@@ -10,7 +10,7 @@ const getStyle = computed(() => {
   if (props.text === props.active)
     return 'text-button bg-blue-3 text-blue-5'
   else
-    return 'text-button bg-gray-7'
+    return 'text-button bg-gray-1 dark:bg-gray-7'
 })
 </script>
 

@@ -72,14 +72,10 @@ function toggleShow() {
   showAllcat.value = !showAllcat.value
 }
 const getStyle = computed(() => {
-  if (showAllcat.value) {
-    return {
-      backgroundColor: 'rgba(59,130,246)',
-    }
-  }
-  return {
-    backgroundColor: 'rgba(55,65,81)',
-  }
+  if (showAllcat.value)
+    return 'bg-blue-3 text-blue-5'
+
+  return 'bg-gray-1 dark:bg-gray-7'
 })
 
 // onActivated(() => {
@@ -94,6 +90,7 @@ onUpdated(() => {
   console.log('update')
   localStorage.removeItem('catlist')
   localStorage.setItem('catlist', showCatlist.value.join(','))
+  console.log(import.meta)
 })
 </script>
 
@@ -118,7 +115,7 @@ onUpdated(() => {
         w-15
         px-4 py-2
         duration-200
-        :style="getStyle"
+        :class="getStyle"
         hover:bg-blue-3 hover:text-blue-5
         @click="toggleShow()"
       >
@@ -126,7 +123,7 @@ onUpdated(() => {
       </div>
     </div>
 
-    <div v-if="showAllcat" bg-gray-800 p-4 mt-4 rounded-2>
+    <div v-if="showAllcat" dark:bg-gray-800 bg-gray-1 p-4 mt-4 rounded-2>
       <div v-for="(bigCat, i) in bigCatlist" :key="i" flex mb-4>
         <div class="name" text-2xl>
           {{ bigCat }}
@@ -160,7 +157,6 @@ onUpdated(() => {
     padding-top: 10px;
   }
   .cat{
-    color: aliceblue;
     min-width: 5rem;
     /* min-height: 3rem; */
     height: 3rem;
@@ -168,6 +164,9 @@ onUpdated(() => {
     justify-content: center;
     align-items: center;
     cursor: pointer;
+  }
+  .dark .cat{
+    color: aliceblue;
   }
   .cat.active{
     color: #335eea;

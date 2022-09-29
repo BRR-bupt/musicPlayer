@@ -1,5 +1,6 @@
 <script setup lang='ts'>
 import type { TrackslistInfo } from '~/utils/model/interface'
+import fixDate from '~/utils/fixDate'
 interface Props {
   tracklistInfo: TrackslistInfo
   type?: 'default' | 'dailySongs'
@@ -44,7 +45,7 @@ const emit = defineEmits<{
         Playlist by {{ tracklistInfo.artistName }}
       </h3>
       <h3 class="update-time" mt-1 text-gray-700 dark:text-gray-400>
-        最后更新于 {{ tracklistInfo.updateTime ? tracklistInfo.updateTime : '今天' }}
+        最后更新于 {{ tracklistInfo.updateTime ? fixDate(tracklistInfo.updateTime) : '今天' }}
       </h3>
       <h3
         class="description hover:text-black hover:dark:text-gray-200"
